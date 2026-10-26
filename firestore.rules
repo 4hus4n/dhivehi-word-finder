@@ -7,10 +7,10 @@ service cloud.firestore {
         && request.auth.uid == uid
         && request.resource.data.total is int
         && request.resource.data.total >= 0
-        && request.resource.data.total <= 20000
+        && request.resource.data.total <= 60000
         && request.resource.data.time is number
         && request.resource.data.maxLevel is int
-        && request.resource.data.maxLevel <= 10;
+        && request.resource.data.maxLevel <= 20;
     }
   }
 }

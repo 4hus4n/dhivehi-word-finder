@@ -1,3 +1,4 @@
+// Levels 11–20 use two-word phrases too; spaces are ignored in the grid.
 // Each level has its OWN word list — no word appears in more than one level.
 // A word = [Dhivehi, meaning]. Length is counted in cells (letter + fili).
 // Level settings: word length range, grid size, words per game, directions
@@ -59,5 +60,125 @@ export const LEVELS = [
     ["ދަނޑުވެރިކަން","farming"],["ފަތުރުވެރިކަން","tourism"],["ހިތްހަމަޖެހުން","contentment"],
     ["ހުނަރުވެރިކަން","skill"],["އުޅަނދުފަހަރު","vessels, boats"],["ފަރުވާތެރިކަން","carefulness"],
     ["ސާފުތާހިރުކަން","cleanliness"],["ސިއްޙީމަރުކަޒު","health centre"],["އިސްތިހާރުތައް","advertisements"],
-    ["ތަރައްޤީކުރުން","developing"],["ކާމިޔާބުކަން","success"],["ޒިންމާދާރުކަން","responsibility"]]}
+    ["ތަރައްޤީކުރުން","developing"],["ކާމިޔާބުކަން","success"],["ޒިންމާދާރުކަން","responsibility"]]},
+
+  { min:6, max:6, size:11, count:8, dirs:3, par:270, words:[ // level 11
+    ["ދިވެހި ތާރީޚު","Maldivian history"],
+    ["ހެނދުނު ކާނާ","breakfast"],
+    ["ރޭގަނޑު ކާނާ","dinner"],
+    ["މެންދުރު ކާނާ","lunch"],
+    ["ގެސްޓްހައުސް","guesthouse"],
+    ["ފަޅުރަށްތައް","uninhabited islands"],
+    ["މަސްވެރިދޯނި","fishing vessel"],
+    ["ދަތުރުފަތުރު","travel, transport"],
+    ["ސްކޫލުކުދިން","schoolchildren"],
+    ["މުދައްރިސުން","teachers"],
+    ["އިސްލާމްދީން","the religion of Islam"],
+    ["ނަމާދުކުރުން","praying"],
+    ["ޙައްޖު ދަތުރު","Hajj journey"]]},
+
+  { min:6, max:6, size:12, count:9, dirs:3, par:290, words:[ // level 12
+    ["އުމްރާ ދަތުރު","Umrah journey"],
+    ["މިނިވަންކަން","freedom, independence"],
+    ["ކަނޑުގެ ފެން","seawater"],
+    ["ފެނުގެ ޓާންކި","water tank"],
+    ["ބައިވެރިވުން","taking part"],
+    ["އެއްބާރުލުން","cooperation"],
+    ["ބެލެހެއްޓުން","looking after"],
+    ["ތަރުބިއްޔަތު","upbringing"],
+    ["ކަނޑު ދަތުރު","sea voyage"],
+    ["ވައިގެ ދަތުރު","air travel"],
+    ["ހަނދުގެ އަލި","moonlight"],
+    ["އިރު އޮއްސުން","sunset"],
+    ["ރީތި ރަށްރަށް","beautiful islands"]]},
+
+  { min:6, max:6, size:12, count:9, dirs:3, par:300, words:[ // level 13
+    ["ފެހި ރުއްގަސް","green trees"],
+    ["ފުޓުބޯޅަ ޓީމު","football team"],
+    ["ކަނޑު ފެތުން","sea swimming"],
+    ["ދޯނި ދުއްވުން","sailing a boat"],
+    ["ދިވެހި އަކުރު","Dhivehi letters"],
+    ["ދިވެހި ވާހަކަ","Dhivehi stories"],
+    ["ކަނޑުގެ ރާޅު","sea waves"],
+    ["ސްކޫލު ބަގީޗާ","school garden"],
+    ["ދިރާސާކުރުން","studying, research"],
+    ["ދިފާޢުކުރުން","defending"],
+    ["ފަރުވާދިނުން","giving treatment"],
+    ["ހަމަޖެއްސުން","arranging"]]},
+
+  { min:7, max:7, size:12, count:8, dirs:3, par:300, words:[ // level 14
+    ["ރަނގަޅުކުރުން","improving"],
+    ["ހިމާޔަތްކުރުން","protecting"],
+    ["ޚިދުމަތްކުރުން","serving"],
+    ["ތައްޔާރުކުރުން","preparing"],
+    ["ސައިންސްވެރިން","scientists"],
+    ["ތަޙުޤީޤުކުރުން","investigating"],
+    ["ފުޓުބޯޅަ ކުޅުން","playing football"],
+    ["ބޮޑުބެރު ޖެހުން","playing bodu beru"],
+    ["ކުނި ނައްތާލުން","waste disposal"],
+    ["ރައްކާތެރިކަން","protection, safety"]]},
+
+  { min:7, max:7, size:13, count:9, dirs:3, par:320, words:[ // level 15
+    ["ބުއްދިވެރިކަން","wisdom, intelligence"],
+    ["ތަޖުރިބާކާރުން","experienced people"],
+    ["ޤައުމީ ޚިދުމަތް","national service"],
+    ["ސިއްޙީ ޚިދުމަތް","health service"],
+    ["ތައުލީމީ ދަތުރު","school trip"],
+    ["ހުކުރު މިސްކިތް","Friday mosque"],
+    ["ދިވެހި ސަޤާފަތް","Maldivian culture"],
+    ["މިނިވަން ދުވަސް","Independence Day"],
+    ["ޖުމްހޫރީ ދުވަސް","Republic Day"],
+    ["ނަސްރުގެ ދުވަސް","Victory Day"]]},
+
+  { min:7, max:7, size:13, count:9, dirs:3, par:330, words:[ // level 16
+    ["ރަށު ކައުންސިލް","island council"],
+    ["ސިޓީ ކައުންސިލް","city council"],
+    ["ރަށުގެ ބަނދަރު","island harbour"],
+    ["ކަނޑުގެ ދިރުން","marine life"],
+    ["ކުޅިވަރު ދަނޑު","sports ground"],
+    ["ގޭގެ މަސައްކަތް","housework"],
+    ["އާއިލާގެ މީހުން","family members"],
+    ["ޝުކުރުވެރިކަން","gratitude"],
+    ["ހިތްވަރުދިނުން","encouragement"]]},
+
+  { min:8, max:8, size:13, count:8, dirs:3, par:330, words:[ // level 17
+    ["އިޙްތިރާމްކުރުން","showing respect"],
+    ["ކުޅިވަރު މައިދާން","sports field"],
+    ["ސްކޫލު ދަރިވަރުން","school students"],
+    ["ޙިކުމަތްތެރިކަން","wisdom"],
+    ["އިޖްތިމާޢީ ގުޅުން","social relations"],
+    ["ތައުލީމީ ޚިދުމަތް","education service"],
+    ["ކުޅިވަރު މުބާރާތް","sports tournament"],
+    ["ފުޓުބޯޅަ މުބާރާތް","football tournament"],
+    ["ޤުރުއާން ކިޔެވުން","reading the Quran"],
+    ["ޤުރުއާން މުބާރާތް","Quran competition"]]},
+
+  { min:8, max:8, size:13, count:9, dirs:3, par:350, words:[ // level 18
+    ["ދިވެހި ރައްޔިތުން","Maldivian citizens"],
+    ["އަތޮޅު ކައުންސިލް","atoll council"],
+    ["ރަށުގެ ރައްޔިތުން","island people"],
+    ["ރަށުގެ ގޮނޑުދޮށް","island beach"],
+    ["ދުވުމުގެ މުބާރާތް","running race"],
+    ["ފެތުމުގެ މުބާރާތް","swimming competition"],
+    ["ކުޑަކުދިންގެ ފޮތް","children's book"],
+    ["ރަޙްމަތްތެރިކަން","friendliness"],
+    ["މަސައްކަތްތެރިން","workers"]]},
+
+  { min:9, max:9, size:13, count:7, dirs:3, par:330, words:[ // level 19
+    ["ދަތުރުފަތުރުކުރުން","travelling"],
+    ["ރިސޯޓު މުވައްޒަފުން","resort staff"],
+    ["ޤައުމީ ފުޓުބޯޅަ ޓީމު","national football team"],
+    ["މަސްވެރިންގެ ދުވަސް","Fishermen's Day"],
+    ["ކުޑަކުދިންގެ ދުވަސް","Children's Day"],
+    ["ސްކޫލުގެ ލައިބްރަރީ","school library"],
+    ["ސްކޫލުގެ މަސައްކަތް","schoolwork"]]},
+
+  { min:9, max:10, size:13, count:7, dirs:3, par:360, words:[ // level 20
+    ["ކުޑަކުދިންގެ ބަގީޗާ","children's park"],
+    ["ކުޑަކުދިންގެ ވާހަކަ","children's stories"],
+    ["މަސައްކަތްތެރިކަން","hard work, diligence"],
+    ["ދަރިން ބެލެހެއްޓުން","raising children"],
+    ["ރައްޔިތުންގެ މަޖިލީހު","parliament (People's Majlis)"],
+    ["މުދައްރިސުންގެ ދުވަސް","Teachers' Day"],
+    ["ފުޓުބޯޅަ ކުޅުންތެރިން","football players"]]}
 ];

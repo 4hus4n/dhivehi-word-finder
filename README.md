@@ -1,6 +1,6 @@
 # ބަސް ހޯދާ — Dhivehi Word Finder
 
-A Dhivehi (Thaana) word search game with 10 levels, Google login and a leaderboard.
+A Dhivehi (Thaana) word search game with 20 levels, Google login and a leaderboard.
 Static site for GitHub Pages; login and scores use Firebase (free Spark plan).
 
 Crafted by clickandcraft in Milandhoo.
@@ -19,8 +19,18 @@ Crafted by clickandcraft in Milandhoo.
 | 8 | 5–6 | 11×11 | 8 | all 8 | 4:00 |
 | 9 | 6 | 11×11 | 8 | all 8 | 4:30 |
 | 10 | 6–7 | 12×12 | 8 | all 8 | 5:00 |
+| 11 | 6 | 11×11 | 8 | all 8 | 4:30 |
+| 12 | 6 | 12×12 | 9 | all 8 | 4:50 |
+| 13 | 6 | 12×12 | 9 | all 8 | 5:00 |
+| 14 | 7 | 12×12 | 8 | all 8 | 5:00 |
+| 15 | 7 | 13×13 | 9 | all 8 | 5:20 |
+| 16 | 7 | 13×13 | 9 | all 8 | 5:30 |
+| 17 | 8 | 13×13 | 8 | all 8 | 5:30 |
+| 18 | 8 | 13×13 | 9 | all 8 | 5:50 |
+| 19 | 9 | 13×13 | 7 | all 8 | 5:30 |
+| 20 | 9–10 | 13×13 | 7 | all 8 | 6:00 |
 
-Each level unlocks after the one before it. Every level has its own word list (139 words total) — no word is used in two levels, and replays pick words you haven't seen yet until the list runs out. Tap a word (or hover on desktop) to see its meaning. Edit `js/words.js` to add words, meanings or change levels.
+Each level unlocks after the one before it. Every level has its own word list (239 words and phrases total) — no word is used in two levels, and replays pick words you haven't seen yet until the list runs out. Tap a word (or hover on desktop) to see its meaning. Edit `js/words.js` to add words, meanings or change levels.
 
 ## Points
 
