@@ -1,0 +1,16 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /players/{uid} {
+      allow read: if true;
+      allow write: if request.auth != null
+        && request.auth.uid == uid
+        && request.resource.data.total is int
+        && request.resource.data.total >= 0
+        && request.resource.data.total <= 20000
+        && request.resource.data.time is number
+        && request.resource.data.maxLevel is int
+        && request.resource.data.maxLevel <= 10;
+    }
+  }
+}
