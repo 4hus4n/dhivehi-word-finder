@@ -162,6 +162,10 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;font-family:var(--nu
 .words{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
 .chip{font-family:var(--word);font-weight:700;font-size:1.2rem;padding:2px 14px;border-radius:999px;background:var(--surface);
   box-shadow:inset 0 0 0 1px var(--line);line-height:1.9;animation:pop .4s var(--spring) both;animation-delay:calc(var(--i)*.06s + .4s)}
+.chip{border:0;color:var(--ink);cursor:pointer;position:relative}
+@media (hover:hover){.chip:hover::after{content:attr(data-en);position:absolute;bottom:calc(100% + 8px);left:50%;translate:-50% 0;
+  white-space:nowrap;background:var(--ink);color:var(--bg);font-family:var(--num);font-weight:500;font-size:.85rem;line-height:1.4;
+  padding:4px 10px;border-radius:8px;direction:ltr;z-index:3;pointer-events:none;animation:fadeUp .2s ease both}}
 .chip.found{background:var(--c);color:#0B1726;box-shadow:none;animation:chipWin .5s var(--spring) both}
 @keyframes chipWin{40%{transform:scale(1.25) rotate(-4deg)}100%{transform:none}}
 
@@ -201,3 +205,18 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;font-family:var(--nu
 @keyframes toast{0%{opacity:0;transform:translateY(20px)}10%,85%{opacity:1;transform:none}100%{opacity:0}}
 
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition:none!important}}
+
+/* word meanings */
+.wcard{gap:10px}
+.wbig{font-family:var(--word);font-weight:700;font-size:3rem;line-height:1.5;animation:pop .5s var(--spring) both}
+.wen{font-family:var(--num);font-weight:600;font-size:1.4rem;color:var(--sun);direction:ltr}
+.wmeta{color:var(--muted)}
+.wlink{color:var(--teal);font-weight:700;text-decoration:none}
+.wlist{text-align:start;background:var(--bg2);border-radius:16px;padding:8px 14px}
+.wlist summary{cursor:pointer;font-weight:700}
+#mWordsList{display:flex;flex-direction:column;gap:4px;margin-top:6px;max-height:30vh;overflow:auto}
+.mw{display:flex;justify-content:space-between;align-items:center;gap:10px;border:0;background:none;padding:4px 0;text-align:start}
+.mw b{font-family:var(--word);font-size:1.15rem;border-inline-start:4px solid var(--c);padding-inline-start:8px}
+.mw span{font-family:var(--num);font-weight:400;color:var(--muted);direction:ltr;font-size:.9rem}
+#wordModal{z-index:15}
+.toast{max-width:calc(100vw - 32px);overflow:hidden;text-overflow:ellipsis}

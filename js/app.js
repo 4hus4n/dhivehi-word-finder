@@ -1,4 +1,4 @@
-import { WORDS, LEVELS } from "./words.js";
+import { LEVELS } from "./words.js";
 import { firebaseConfig } from "./firebase-config.js";
 
 const $ = id => document.getElementById(id);
@@ -149,18 +149,25 @@ $("refreshBtn").onclick = () => loadBoard();
 /* ---------- game ---------- */
 let level=1, cfg=null, size=10, grid=[], placed=[], found=new Set(), t0=0, elapsed=0, tick=null, sel=null, done=false;
 
-function pickWords(c){
-  let pool = WORDS.filter(w=>{const n=units(w).length; return n>=c.min && n<=c.max && n<=c.size;});
-  if(pool.length < c.count) pool = WORDS.filter(w=>{const n=units(w).length; return n>=c.min-1 && n<=c.max && n<=c.size;});
-  return [...new Set(pool)];
+// Words not yet played in this level come first; once all are used, the cycle restarts.
+const SEEN_KEY="dwf-seen";
+function getSeen(){ try{ return JSON.parse(localStorage.getItem(SEEN_KEY))||{}; }catch(e){ return {}; } }
+function setSeen(o){ try{ localStorage.setItem(SEEN_KEY,JSON.stringify(o)); }catch(e){} }
+const MEAN = new Map(LEVELS.flatMap(L=>L.words));
+function pickGroups(c){
+  const seen=getSeen(), s=new Set(seen[level]||[]), all=c.words.map(x=>x[0]);
+  let fresh=all.filter(w=>!s.has(w));
+  if(fresh.length<c.count){ seen[level]=[]; setSeen(seen); return [all,[]]; }
+  return [fresh, all.filter(w=>s.has(w))];
 }
+function markSeen(words){ const seen=getSeen(); seen[level]=[...new Set([...(seen[level]||[]),...words])]; setSeen(seen); }
 function build(){
   cfg = LEVELS[level-1]; size = cfg.size;
-  const pool = pickWords(cfg);
+  const [fresh,old] = pickGroups(cfg);
   let bestGrid=null, bestPlaced=[];
   for(let attempt=0; attempt<40; attempt++){
     const g = Array.from({length:size},()=>Array(size).fill(null)), pl=[];
-    for(const w of shuffle(pool.slice())){
+    for(const w of [...shuffle(fresh.slice()),...shuffle(old.slice())]){
       if(pl.length>=cfg.count) break;
       const u=units(w), dirs=DIRS[cfg.dirs]; let ok=false;
       for(let k=0;k<250&&!ok;k++){
@@ -178,7 +185,8 @@ function build(){
   }
   grid=bestGrid; placed=bestPlaced;
   for(let r=0;r<size;r++) for(let c=0;c<size;c++) if(grid[r][c]===null) grid[r][c]=CONS[rnd(CONS.length)]+FILI[rnd(FILI.length)];
-  placed.forEach((p,i)=>{p.color=COLORS[i%COLORS.length]; p.hit=null;});
+  placed.forEach((p,i)=>{p.color=COLORS[i%COLORS.length]; p.hit=null; p.en=MEAN.get(p.w)||"";});
+  markSeen(placed.map(p=>p.w));
   found=new Set(); done=false; sel=null;
 }
 function startLevel(n){
@@ -194,7 +202,7 @@ function renderBoard(){
   for(let r=0;r<size;r++) for(let c=0;c<size;c++){ const d=document.createElement("div");
     d.className="cell"; d.dataset.r=r; d.dataset.c=c; d.textContent=grid[r][c];
     d.style.setProperty("--d", (Math.hypot(r-mid,c-mid)*0.05).toFixed(2)+"s"); g.appendChild(d); }
-  $("words").innerHTML = placed.map((p,i)=>`<span class="chip" id="chip-${i}" style="--i:${i};--c:${p.color}">${p.w}</span>`).join("");
+  $("words").innerHTML = placed.map((p,i)=>`<button class="chip" id="chip-${i}" data-w="${p.w}" data-en="${esc(p.en)}" style="--i:${i};--c:${p.color}">${p.w}</button>`).join("");
   $("totalN").textContent=placed.length; $("foundN").textContent=0; $("pills").innerHTML=""; $("floats").innerHTML="";
   requestAnimationFrame(()=>{ sizeFont(); drawPills(); });
 }
@@ -237,6 +245,7 @@ function endSel(){ if(!sel) return; const [er,ec]=sel.end;
   if(hitIdx>=0){
     const p=placed[hitIdx]; p.hit=[sel.r,sel.c,er,ec]; found.add(hitIdx); justFound=hitIdx;
     const ch=$("chip-"+hitIdx); ch.classList.add("found");
+    toast(`${p.w} — ${p.en}`);
     cells.forEach(([r,c],k)=>{ const el=cellEl(r,c); el.classList.remove("hit"); void el.offsetWidth;
       el.style.setProperty("--d",(k*0.05)+"s"); el.classList.add("hit"); });
     const [x1,y1]=center(sel.r,sel.c), [x2,y2]=center(er,ec);
@@ -272,6 +281,7 @@ async function finish(){
   note.textContent = isBest ? (prev ? `އާ ރެކޯޑެއް! (ކުރީގައި ${prev.score})` : "") : `އެންމެ ރަނގަޅު: ${prev.score} · ${fmt(prev.time)}`;
   if(isBest&&prev) note.classList.add("rec");
   $("nextBtn").hidden = level>=LEVELS.length;
+  $("mWordsList").innerHTML = placed.map(p=>`<button class="mw" data-w="${p.w}" style="--c:${p.color}"><b>${p.w}</b><span>${esc(p.en)}</span></button>`).join("");
   const starsEl=[...$("stars").children]; starsEl.forEach(s=>s.className="");
   $("modal").hidden=false;
   setTimeout(()=>countUp($("mTotal"),score),500);
@@ -284,6 +294,14 @@ async function finish(){
   }
 }
 $("nextBtn").onclick = () => startLevel(level+1);
+
+/* ---------- word meanings ---------- */
+function showMeaning(w){
+  const en=MEAN.get(w)||""; $("wmWord").textContent=w; $("wmEn").textContent=en;
+  $("wmCells").textContent=units(w).length; $("wordModal").hidden=false; }
+document.addEventListener("click", e => {
+  const c=e.target.closest(".chip, .mw"); if(c){ showMeaning(c.dataset.w); return; }
+  if(e.target.id==="wordModal"||e.target.closest("#wmClose")) $("wordModal").hidden=true; });
 $("retryBtn").onclick = () => startLevel(level);
 $("homeBtn").onclick = () => { $("modal").hidden=true; stopConfetti(); go("start"); };
 
