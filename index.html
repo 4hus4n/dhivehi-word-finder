@@ -3,98 +3,121 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#0F1A1C">
+<meta name="theme-color" content="#0E1B2B">
 <title>ބަސް ހޯދާ · Dhivehi Word Finder</title>
 <link rel="preload" href="fonts/FreeFont-Thaana-Bold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<div class="wrap">
+<canvas id="bg" aria-hidden="true"></canvas>
 
-  <header class="top">
-    <h1 class="brand">ބަސް ހޯދާ</h1>
-    <div id="userBox" class="user">
-      <button class="btn google" id="loginBtn" hidden>
-        <svg viewBox="0 0 48 48" width="18" height="18" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>
-        <span>ގޫގުލް އިން ލޮގިން</span>
-      </button>
-      <div id="me" class="me" hidden>
-        <img id="meImg" alt="" referrerpolicy="no-referrer">
-        <span id="meName"></span>
-        <button class="link" id="logoutBtn">ލޮގްއައުޓް</button>
-      </div>
-    </div>
-  </header>
-
-  <!-- HOME -->
-  <main id="home">
-    <section class="panel">
-      <div class="panel-head">
-        <h2>ލެވެލްތައް</h2>
-        <span class="muted" id="myTotal"></span>
-      </div>
-      <div class="levels" id="levels"></div>
-      <p class="muted small" id="saveHint">ލީޑަބޯޑަށް ޕޮއިންޓް ރައްކާކުރަން ލޮގިން ކުރޭ</p>
-    </section>
-
-    <section class="panel">
-      <div class="panel-head">
-        <h2>ލީޑަބޯޑު</h2>
-        <button class="link" id="refreshBtn">އާކުރޭ</button>
-      </div>
-      <div class="table-wrap">
-        <table class="board-table">
-          <thead><tr><th>#</th><th>ކުޅުންތެރިޔާ</th><th>ލެވެލް</th><th>ޕޮއިންޓް</th><th>ވަގުތު</th></tr></thead>
-          <tbody id="lbBody"><tr><td colspan="5" class="muted center">...</td></tr></tbody>
-        </table>
-      </div>
-      <details class="rules">
-        <summary>ޕޮއިންޓް ދެވޭ ގޮތް</summary>
-        <ul>
-          <li>ހޯދާ ކޮންމެ ބަހެއްގައިވާ ކޮންމެ އަކުރަކަށް 10 ޕޮއިންޓް.</li>
-          <li>ކޮންމެ ލެވެލަކަށް ވަގުތެއް ހުންނާނެ. އެ ވަގުތުގެ ކުރިން ނިންމިއްޔާ ބާކީ ކޮންމެ ސިކުންތަކަށް 3 ބޯނަސް ޕޮއިންޓް.</li>
-          <li>ކޮންމެ ލެވެލެއްގެ އެންމެ ރަނގަޅު ޕޮއިންޓް ގުނޭނެ. އެންމެ ގިނަ ޕޮއިންޓް ލިބުނު މީހާ އެންމެ މަތީގައި.</li>
-          <li>ޕޮއިންޓް އެއްވަރު ނަމަ، ކުރު ވަގުތެއްގައި ނިންމި މީހާ މަތީގައި.</li>
-        </ul>
-      </details>
-    </section>
-  </main>
-
-  <!-- GAME -->
-  <main id="game" hidden>
-    <div class="game-bar">
-      <button class="btn" id="backBtn">→ ހޯމް</button>
-      <strong id="lvlTitle"></strong>
-      <div class="stats"><span>ހޯދި <b id="foundN">0</b>/<b id="totalN">0</b></span><span id="timer" class="timer">0:00</span></div>
-    </div>
-    <div class="parbar"><div id="parFill"></div></div>
-
-    <div class="board" id="board">
-      <svg id="pills"></svg>
-      <div class="grid" id="grid"></div>
-    </div>
-
-    <div class="words" id="words"></div>
-
-    <section class="panel result" id="result" hidden>
-      <h2>ހުރިހާ ބަހެއް ހޯދައިފި! 🎉</h2>
-      <dl class="score">
-        <div><dt>ބަސްތަކުގެ ޕޮއިންޓް</dt><dd id="rWords"></dd></div>
-        <div><dt>ވަގުތުގެ ބޯނަސް</dt><dd id="rBonus"></dd></div>
-        <div><dt>ވަގުތު</dt><dd id="rTime"></dd></div>
-        <div class="total"><dt>ޖުމްލަ</dt><dd id="rTotal"></dd></div>
-      </dl>
-      <p class="muted small" id="rNote"></p>
-      <div class="row">
-        <button class="btn primary" id="nextBtn">ދެން އޮތް ލެވެލް ←</button>
-        <button class="btn" id="retryBtn">އަލުން ކުޅޭ</button>
-        <button class="btn" id="homeBtn">ހޯމް</button>
-      </div>
-    </section>
-  </main>
-
-  <footer>crafted by clickandcraft in Milandhoo</footer>
+<!-- user chip (all screens) -->
+<div class="userbar">
+  <button class="gbtn" id="loginBtn" hidden>
+    <svg viewBox="0 0 48 48" width="18" height="18" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>
+    <span>ލޮގިން</span>
+  </button>
+  <button class="mechip" id="me" hidden><img id="meImg" alt="" referrerpolicy="no-referrer"><span id="meName"></span></button>
 </div>
+
+<!-- START -->
+<section class="screen" id="s-start">
+  <div class="start">
+    <div class="logo" id="logo" aria-label="ބަސް ހޯދާ">
+      <div class="logo-pill"></div>
+      <span class="tile" style="--i:0">ބަ</span><span class="tile" style="--i:1">ސް</span>
+      <span class="gap"></span>
+      <span class="tile" style="--i:2">ހޯ</span><span class="tile" style="--i:3">ދާ</span>
+    </div>
+    <p class="tagline">Dhivehi Word Finder</p>
+    <div class="mytotal" id="myTotal" hidden></div>
+    <div class="menu">
+      <button class="big play" id="playBtn"><span class="pt">ކުޅެން ފަށާ</span><span class="ps" id="playSub">ލެވެލް <b class="num">1</b></span></button>
+      <button class="big" data-go="levels"><span class="pt">ލެވެލްތައް</span><span class="ps"><b class="num">10</b> ލެވެލް</span></button>
+      <button class="big" data-go="board"><span class="pt">ލީޑަބޯޑު</span><span class="ps">🏆</span></button>
+    </div>
+  </div>
+  <footer>crafted by clickandcraft in Milandhoo</footer>
+</section>
+
+<!-- LEVELS -->
+<section class="screen" id="s-levels" hidden>
+  <div class="bar"><button class="back" data-go="start" aria-label="Back">→</button><h2>ލެވެލްތައް</h2><span></span></div>
+  <div class="levels" id="levels"></div>
+  <details class="rules">
+    <summary>ޕޮއިންޓް ދެވޭ ގޮތް</summary>
+    <ul>
+      <li>ހޯދާ ކޮންމެ ބަހެއްގެ ކޮންމެ އަކުރަކަށް <b>10</b> ޕޮއިންޓް.</li>
+      <li>ވަގުތު ހަމަވުމުގެ ކުރިން ނިންމިއްޔާ ބާކީ ކޮންމެ ސިކުންތަކަށް <b>3</b> ބޯނަސް ޕޮއިންޓް.</li>
+      <li>⭐⭐⭐ ވަގުތުގެ ބައިކުޅަ އެއްބައިގެ ތެރޭ · ⭐⭐ ވަގުތުގެ ތެރޭ · ⭐ ނިންމުން</li>
+      <li>ކޮންމެ ލެވެލެއްގެ އެންމެ ރަނގަޅު ޕޮއިންޓް ގުނޭ. ޕޮއިންޓް އެއްވަރު ނަމަ ކުރު ވަގުތެއްގައި ނިންމި މީހާ މަތީގައި.</li>
+    </ul>
+  </details>
+</section>
+
+<!-- LEADERBOARD -->
+<section class="screen" id="s-board" hidden>
+  <div class="bar"><button class="back" data-go="start" aria-label="Back">→</button><h2>ލީޑަބޯޑު</h2><button class="back" id="refreshBtn" aria-label="Refresh">↻</button></div>
+  <div class="podium" id="podium"></div>
+  <ol class="lb" id="lb"></ol>
+  <p class="note" id="lbNote"></p>
+</section>
+
+<!-- GAME -->
+<section class="screen" id="s-game" hidden>
+  <div class="bar">
+    <button class="back" id="quitBtn" aria-label="Back">→</button>
+    <div class="lvlbadge"><span>ލެވެލް</span><b id="lvlNum">1</b></div>
+    <div class="clock"><b id="timer">0:00</b></div>
+  </div>
+  <div class="hud">
+    <div class="parbar"><div id="parFill"></div></div>
+    <div class="count"><b id="foundN">0</b><span>/</span><b id="totalN">0</b></div>
+  </div>
+  <div class="board" id="board">
+    <svg id="pills"></svg>
+    <div class="grid" id="grid"></div>
+    <div id="floats"></div>
+  </div>
+  <div class="words" id="words"></div>
+</section>
+
+<!-- RESULT POPUP -->
+<div class="modal" id="modal" hidden>
+  <canvas id="confetti"></canvas>
+  <div class="card" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+    <div class="stars" id="stars"><i>★</i><i>★</i><i>★</i></div>
+    <h2 id="mTitle">ހުރިހާ ބަހެއް ހޯދައިފި!</h2>
+    <div class="bigscore"><b id="mTotal">0</b><span>ޕޮއިންޓް</span></div>
+    <dl class="breakdown">
+      <div><dt>ބަސްތަކުގެ ޕޮއިންޓް</dt><dd id="mWords">0</dd></div>
+      <div><dt>ވަގުތުގެ ބޯނަސް</dt><dd id="mBonus">0</dd></div>
+      <div><dt>ވަގުތު</dt><dd id="mTime">0:00</dd></div>
+    </dl>
+    <p class="mnote" id="mNote"></p>
+    <button class="big play" id="nextBtn"><span class="pt">ދެން އޮތް ލެވެލް</span></button>
+    <div class="mrow">
+      <button class="ghost" id="retryBtn">↻ އަލުން</button>
+      <button class="ghost" id="homeBtn">ހޯމް</button>
+    </div>
+  </div>
+</div>
+
+<!-- ACCOUNT POPUP -->
+<div class="modal" id="acct" hidden>
+  <div class="card small">
+    <img id="acctImg" alt="" referrerpolicy="no-referrer" class="avatar">
+    <h2 id="acctName"></h2>
+    <p class="mnote">ތިޔަ ޕޮއިންޓްތައް ލީޑަބޯޑަށް ރައްކާވަނީ</p>
+    <button class="ghost" id="logoutBtn">ލޮގްއައުޓް</button>
+    <button class="ghost" id="acctClose">ބަންދުކުރޭ</button>
+  </div>
+</div>
+
+<div class="toast" id="toast" hidden></div>
 <script type="module" src="js/app.js"></script>
 </body>
 </html>
