@@ -53,5 +53,4 @@ Until step 6 is done the game works, but login and the leaderboard stay off.
 
 ## Font
 
-Uses FreeFont Thaana (GNU FreeFont, GPL with font exception). To use another Thaana font
-(Faruma, your own), save it as `fonts/custom.woff2` — the game tries it first.
+Uses MV Typewriter (Regular, SemiBold, Bold) in `fonts/`. Numbers and English use Fredoka from Google Fonts.

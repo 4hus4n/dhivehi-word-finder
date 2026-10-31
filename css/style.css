@@ -1,16 +1,15 @@
 /* Night-lagoon game look (single dark theme, by choice).
-   Thaana: FreeFont Thaana 400/700 (put fonts/custom.woff2 to override tiles).
-   Numbers & Latin: Fredoka 400–700. */
-@font-face{font-family:"WordFont";font-weight:700;font-display:swap;
-  src:url("../fonts/custom.woff2") format("woff2"),url("../fonts/FreeFont-Thaana-Bold.woff2") format("woff2")}
-@font-face{font-family:"Thaana";font-weight:400;font-display:swap;src:url("../fonts/FreeFont-Thaana.woff2") format("woff2")}
-@font-face{font-family:"Thaana";font-weight:700;font-display:swap;src:url("../fonts/FreeFont-Thaana-Bold.woff2") format("woff2")}
+   Thaana: MV Typewriter 400/600/700. Numbers & Latin: Fredoka 400–700. */
+@font-face{font-family:"WordFont";font-weight:700;font-display:swap;src:url("../fonts/MVTypewriter-Bold.woff2") format("woff2")}
+@font-face{font-family:"Thaana";font-weight:400;font-display:swap;src:url("../fonts/MVTypewriter-Regular.woff2") format("woff2")}
+@font-face{font-family:"Thaana";font-weight:600;font-display:swap;src:url("../fonts/MVTypewriter-SemiBold.woff2") format("woff2")}
+@font-face{font-family:"Thaana";font-weight:700;font-display:swap;src:url("../fonts/MVTypewriter-Bold.woff2") format("woff2")}
 
 :root{
   --bg:#0B1726; --bg2:#10243A; --surface:#15293F; --surface2:#1C3550; --line:#27425F;
   --ink:#F3F7FB; --muted:#93A9C0; --sun:#FFC94A; --sun-ink:#3A2600; --coral:#FF7A6B; --teal:#4FD6C9;
-  --word:"WordFont","Faruma","MV Boli",sans-serif;
-  --dv:"Thaana","Faruma","MV Boli",sans-serif;
+  --word:"WordFont","MV Typewriter","Faruma",sans-serif;
+  --dv:"Thaana","MV Typewriter","Faruma",sans-serif;
   --num:"Fredoka",system-ui,sans-serif;
   --spring:cubic-bezier(.34,1.56,.64,1);
   color-scheme:dark;

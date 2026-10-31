@@ -1,3 +1,0 @@
-FreeFont Thaana (FreeSerif/FreeSans Thaana glyphs) from GNU FreeFont - https://www.gnu.org/software/freefont/
-License: GNU GPL v3 with the font exception (documents using the font are not covered by the GPL).
-Webfont files taken from the Wikimedia UniversalLanguageSelector font repository.
